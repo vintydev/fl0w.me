@@ -32,4 +32,4 @@ docker-compose.override.yml
 logs/
 *.tmp
 *.bak
-*.swp
+*.swpfl0w-backend/docker-compose.yml
