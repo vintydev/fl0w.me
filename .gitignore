@@ -1,0 +1,35 @@
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Editor / IDE Files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+
+# Java / Maven (backend)
+fl0w-backend/target/
+fl0w-backend/.mvn/
+!fl0w-backend/.mvn/wrapper/maven-wrapper.jar
+fl0w-backend/*.log
+fl0w-backend/*.class
+
+# TypeScript
+*.tsbuildinfo
+
+# Docker
+mysql_data/
+*.env
+docker-compose.override.yml
+
+# General Logs and Temp
+*.log
+logs/
+*.tmp
+*.bak
+*.swp
