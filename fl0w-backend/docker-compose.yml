@@ -1,0 +1,51 @@
+# This is the docker-compose file, used to create the backend services
+services:
+  # MySQL service
+  mysql:
+    image: mysql:8.0 # Newest MySQL image
+    container_name: fl0w-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+    # Healthcheck to ensure MySQL is ready before starting the backend
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - fl0w-network
+
+#  # Backend service (Prod only)
+#  backend:
+#    build:
+#      context: . # Current directory
+#    container_name: fl0w-backend
+#    restart: always
+#    depends_on:
+#      mysql:
+#          condition: service_healthy
+#
+#    ports:
+#      - "${BACKEND_PORT}:8000"
+#    environment:
+#      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+#      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+#      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+#    networks:
+#      - fl0w-network
+
+volumes:
+  mysql_data:
+
+networks:
+  fl0w-network:
+    external: true
