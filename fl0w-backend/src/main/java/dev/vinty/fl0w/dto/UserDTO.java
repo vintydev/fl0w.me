@@ -1,6 +1,6 @@
 package dev.vinty.fl0w.dto;
 
-// Used to transfer user data between the backend and frontend
+// Used to transfer user data between the backend and frontend for API communication
 public class UserDTO {
 
     private Long id;
@@ -8,9 +8,11 @@ public class UserDTO {
     private String lastName;
     private String email;
 
-    // JPA Parameterless constructor
+    // JPA Required Parameterless constructor
     public UserDTO() {
+
     }
+
 
     // Parameterised constructor
     public UserDTO(Long id, String firstName, String lastName, String email) {
