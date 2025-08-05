@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
-    // Creates a new user by mapping UserDTO to User entity, saving it to the repository, and returning the mapped UserDTO
+    // Creates a new user by mapping UserDTO to User entity, saving it to the database, and returning the mapped UserDTO
     @Override
     public UserDTO createUser(UserDTO userDTO) {
 

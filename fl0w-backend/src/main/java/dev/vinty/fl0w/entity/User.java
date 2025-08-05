@@ -1,6 +1,7 @@
 package dev.vinty.fl0w.entity;
 import jakarta.persistence.*;
 
+// JPA entity representing a User in the database table
 @Entity
 @Table(name = "Users")
 public class User {
