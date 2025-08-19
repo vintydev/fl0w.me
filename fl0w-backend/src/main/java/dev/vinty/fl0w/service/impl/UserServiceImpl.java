@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-// Service implementation for UserService interface use (Business Logic Layer + orchestrated calls to the repository layer)
+// Service implementation for UserService interface use (Business Logic Layer + orchestrated calls to the repository layer for db operations)
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -31,17 +31,18 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserDTO createUser(UserDTO userDTO) {
+        System.out.println("1. Service received DTO: " + userDTO.getFirstName());
 
-        // Map UserDTO to User entity
         User user = UserMapper.mapToUser(userDTO);
-        if (user != null) {
-            User savedUser = userRepository.save(user);
+        System.out.println("2. Mapped to entity: " + user.getFirstName());
 
-            // Return the saved user as UserDTO
-            return UserMapper.mapToDTO(savedUser);
-        }
+        User savedUser = userRepository.save(user);
+        System.out.println("3. Saved user with ID: " + savedUser.getId());
 
-        return null;
+        UserDTO result = UserMapper.mapToDTO(savedUser);
+        System.out.println("4. Returning DTO with ID: " + result.getId());
+
+        return result;
     }
 
     /**
@@ -55,8 +56,7 @@ public class UserServiceImpl implements UserService {
     public UserDTO getUserById(Long userId) {
 
         // Find the user by ID using the repository, but add custom logic to handle the case where the user is not found
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> ResourceNotFoundException.userNotFound(userId)); // If user not found, call factory method with userId
+        User user = userRepository.findById(userId).orElseThrow(() -> ResourceNotFoundException.userNotFound(userId)); // If user not found, call factory method with userId
 
         // Map the found User entity to UserDTO and return it
         return UserMapper.mapToDTO(user);
@@ -82,6 +82,37 @@ public class UserServiceImpl implements UserService {
                 .filter(Objects::nonNull) // Filter out any null User entities
                 .map(UserMapper::mapToDTO) // Map each User entity to UserDTO
                 .collect(Collectors.toList()); // Collect the mapped UserDTOs into a List
+    }
+
+    @Override
+    public UserDTO updateUser(Long userId, UserDTO userDTO) {
+
+        // Find the user by ID, throwing an exception if not found
+        User existingUser = userRepository.findById(userId)
+                .orElseThrow(() -> ResourceNotFoundException.userNotFound(userId));
+
+        // Update the existing user's fields with the new data from userDTO
+        existingUser.setFirstName(userDTO.getFirstName());
+        existingUser.setLastName(userDTO.getLastName());
+        existingUser.setEmail(userDTO.getEmail());
+
+        // Save the updated user back to the repository
+        User updatedUser = userRepository.save(existingUser);
+
+        // Map the updated User entity to UserDTO and return it
+        return UserMapper.mapToDTO(updatedUser);
+    }
+
+    @Override
+    public void deleteUser(Long userId) {
+        // Check if the user exists before attempting to delete
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> ResourceNotFoundException.userNotFound(userId));
+
+        // Delete the user from the repository
+        userRepository.delete(user);
+
+        System.out.println("User with ID " + userId + " has been deleted successfully.");
     }
 
 
