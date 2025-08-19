@@ -11,6 +11,7 @@ import java.util.List;
 // This class is a REST controller; handles HTTP requests/responses for user-related operations
 @RestController
 @RequestMapping("/api/users") // Maps requests to /api/users URL to this controller
+@CrossOrigin(origins = "http://localhost:3000") // Allows cross-origin requests from the specified origin
 public class UserController {
 
     private final UserService userService;
