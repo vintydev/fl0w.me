@@ -13,9 +13,10 @@ export const userService = {
      * @returns {Promise<User[]>} A promise that resolves to an array of User objects
      */
     getAllUsers: async () : Promise<User[]> => {
-        
+
         console.log("Fetching all users from the API");
         const response = await apiService.get<User[]>("/users");
+        console.log("Users fetched successfully:", response.data);
         return response.data;
     }
 
