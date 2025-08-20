@@ -7,6 +7,7 @@ public class UserDTO {
     private String firstName;
     private String lastName;
     private String email;
+    private String username;
 
     // JPA Required Parameterless constructor
     public UserDTO() {
@@ -15,11 +16,12 @@ public class UserDTO {
 
 
     // Parameterised constructor
-    public UserDTO(Long id, String firstName, String lastName, String email) {
+    public UserDTO(Long id, String firstName, String lastName, String email, String username) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.username = username;
     }
 
     // Getters and Setters
@@ -53,5 +55,12 @@ public class UserDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

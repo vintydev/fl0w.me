@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * UserService interface defines the contract for user-related operations
- * It provides methods to create, retrieve, and list users
+ * It provides methods to create, retrieve, and list users, etc.
  */
 public interface UserService {
 

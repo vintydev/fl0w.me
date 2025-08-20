@@ -22,7 +22,6 @@ public class ResourceNotFoundException extends RuntimeException {
             new ResourceNotFoundException("Task not found.");
 
 
-    // Factory methods to create specific instances of ResourceNotFoundException with custom messages
     /**
      * Factory method to create a ResourceNotFoundException for a specific user ID.
      * @param id the ID of the user that was not found

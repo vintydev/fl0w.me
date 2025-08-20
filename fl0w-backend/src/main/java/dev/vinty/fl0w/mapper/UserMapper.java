@@ -20,7 +20,7 @@ public class UserMapper {
         }
 
         // Return a new UserDTO object with the properties from the User entity
-        return new UserDTO(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail());
+        return new UserDTO(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getUsername());
     }
 
     /**
@@ -34,6 +34,6 @@ public class UserMapper {
         }
 
         // Return a new User entity with the properties from the UserDTO
-        return new User(userDTO.getId(), userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail());
+        return new User(userDTO.getId(), userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(), userDTO.getUsername()  );
     }
 }

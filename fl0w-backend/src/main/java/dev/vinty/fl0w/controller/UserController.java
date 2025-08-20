@@ -1,7 +1,7 @@
 package dev.vinty.fl0w.controller;
 import dev.vinty.fl0w.dto.UserDTO;
 import dev.vinty.fl0w.service.UserService;
-import org.apache.coyote.Response;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +14,10 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000") // Allows cross-origin requests from the specified origin
 public class UserController {
 
+    @Autowired
     private final UserService userService;
 
+    // Constructor injection for UserService to ensure that the controller has access to the user service layer
     public UserController(UserService userService) {
         this.userService = userService;
     }
